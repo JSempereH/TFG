@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\R}{\mathbb{R}}
+
+\title{Memoria provisional}
+
+\begin{document}
+\maketitle
+
+%Introduccion: Revisión Bezier, motivación y objetivos
+\section{Introducción}
+
+\subsection{Curvas de Bézier}
+Qué son, breve resumen de su historia y para qué son utilizadas.
+
+\subsection{Motivación y objetivos}
+Qué son las curvas fraccionarias generalizadas, ventajas, mencionar posibles usos. Objetivo: Aplicarlas al Data Fitting en Superficies de Riemann. Plan de trabajo.
+
+
+
+
+
+
+
+
+
+
+%Curvas de Bezier generalizadas
+\section{Curvas de Bézier fraccionarias generalizadas}
+
+\subsection{Parámetros de forma}
+
+Sea la curva de Bézier original definida por los $n+1$ puntos de control $P_i \in \R^m $:
+
+\begin{equation*}
+\alpha(t) = \sum_{i = 0}^{n}B_{i,n}(t)P_i
+\end{equation*}
+donde
+\begin{equation*}
+B_{i,n}(t) = \binom{n}{i}(1-t)^{n-i}t^i, \qquad  t\in[0,1]
+\end{equation*}
+
+
+
+Definimos la \textbf{Base de funciones Bernstein de grado n con n parámetros de forma} como:
+\begin{gather*}
+\hat{B}_{i,n}(t) = B_{i,n}(t)(1 + \frac{a_i}{n-i+1}(1-t) -\frac{a_{i+1}}{i+1}t), \qquad t\in[0,1] \\
+a_0 = a_{n+1} = 0 \qquad -(n-i+1) < a_i < i, \qquad  i=0,1,...,n
+\end{gather*}
+
+donde $a_1,...,a_n$ son los \textit{parámetros de forma}. \newline
+
+La base de funciones $\hat{B}_{i,n}(t)$ tiene las siguientes propiedades:
+\begin{enumerate}
+	\item $\hat{B}_{i,n}(t) \geq 0, \qquad t \in [0,1]$
+	\item $\hat{B}_{i,n}(t) = \hat{B}_{n-i,n}(1-t)$, cuando $a_i = -a_{n-i+1}$
+	\item $\hat{B}_{i,n}(t) = B_{i,n}(t)$ cuando $a_i = 0, \qquad i=1,...,n$.
+	\item $\sum_{i=0}^{n}\hat{B}_{i,n}(t) = 1$
+\end{enumerate}
+
+\textbf{NOTA: ¿LO DEMUESTRO O MENCIONO EL ARTÍCULO DONDE SE DEMUESTRA? LA DEMOSTRACIÓN ES MECÁNICA}
+\newline
+
+
+%--------------------------------------------------------------
+%		DEFINICIÓN CURVAS DE BÉZIER CON N PARÁMETROS DE FORMA
+%--------------------------------------------------------------
+Definimos la \textbf{Curva de Bézier de grado n con n parámetros de forma} como
+
+\begin{equation}
+\hat{\alpha}(t) = \sum_{i=0}^{n}\hat{B}_{i,n}(t)P_i, \qquad t \in [0,1]
+\end{equation}
+
+Por las propiedades de la base de funciones $\hat{B}_{i,n}$ se sigue que la nueva curva de Bézier cumple la propiedad del casco convexo.
+\newline
+
+Veamos el efecto que tiene en las curvas al variar los valores de los parámetros de forma.
+El desarrollo de una curva de grado n con n parámetros de forma, con $\mathbf{P_0,P_1,...,P_n} \in \R^m$ puntos de control es:
+
+\begin{gather*}
+\hat{\alpha}(t) = B_{0,n}(t)(1 + 0 - a_1 t)\mathbf{P_0} + B_{1,n}(t)(1 + a_1 (1-t) - \frac{a_2}{2}t)\mathbf{P_1} + \\
++ B_{2,n}(t)(1 + \frac{a_2}{n-1}(1-t) - \frac{a_3}{3}t)\mathbf{P_2} + ... + \\
++ B_{i-1,n}(t)(1 + \frac{a_{i-1}}{n-i+2}(1-t) - \frac{a_i}{i}t) \mathbf{P_{i-1}} + \\
++ B_{i,n}(t)(1 + \frac{a_1}{n-i+1}(1-t) - \frac{a_{i+1}}{i+1}t) \mathbf{P_i} +...+ \\
++ B_{n,n}(t)(1 + a_n (1-t) + 0) \mathbf{P_n}
+\end{gather*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
