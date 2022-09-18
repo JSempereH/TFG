@@ -21,15 +21,21 @@ Qué son las curvas fraccionarias generalizadas, ventajas, mencionar posibles us
 
 
 
+
+
+
+
+
+
 %Curvas de Bezier generalizadas
 \section{Curvas de Bézier fraccionarias generalizadas}
 
 \subsection{Parámetros de forma}
 
-Sea la curva de Bézier original definida por los $n+1$ puntos de control $P_i \in \R^m $:
+Sea la curva de Bézier original definida por los $n+1$ puntos de control $\mathbf{P_i} \in \R^m $:
 
 \begin{equation*}
-\alpha(t) = \sum_{i = 0}^{n}B_{i,n}(t)P_i
+\alpha(t) = \sum_{i = 0}^{n}B_{i,n}(t)\mathbf{P_i}
 \end{equation*}
 donde
 \begin{equation*}
@@ -57,7 +63,11 @@ La base de funciones $\hat{B}_{i,n}(t)$ tiene las siguientes propiedades:
 \textbf{NOTA: ¿LO DEMUESTRO O MENCIONO EL ARTÍCULO DONDE SE DEMUESTRA? LA DEMOSTRACIÓN ES MECÁNICA}
 \newline
 
-Definimos la \textbf{Curvas de Bézier de grado n con n parámetros de forma} como
+
+%--------------------------------------------------------------
+%		DEFINICIÓN CURVAS DE BÉZIER CON N PARÁMETROS DE FORMA
+%--------------------------------------------------------------
+Definimos la \textbf{Curva de Bézier de grado n con n parámetros de forma} como
 
 \begin{equation}
 \hat{\alpha}(t) = \sum_{i=0}^{n}\hat{B}_{i,n}(t)P_i, \qquad t \in [0,1]
@@ -66,5 +76,40 @@ Definimos la \textbf{Curvas de Bézier de grado n con n parámetros de forma} co
 Por las propiedades de la base de funciones $\hat{B}_{i,n}$ se sigue que la nueva curva de Bézier cumple la propiedad del casco convexo.
 \newline
 
-Veamos el efecto que tiene en las curvas al variar los valores de los parámetros de forma:
+Veamos el efecto que tiene en las curvas al variar los valores de los parámetros de forma.
+El desarrollo de una curva de grado n con n parámetros de forma, con $\mathbf{P_0,P_1,...,P_n} \in \R^m$ puntos de control es:
+
+\begin{gather*}
+\hat{\alpha}(t) = B_{0,n}(t)\left(1 + 0 - a_1 t\right)\mathbf{P_0} + B_{1,n}(t)\left(1 + a_1 (1-t) - \frac{a_2}{2}t\right)\mathbf{P_1} + \\
++ B_{2,n}(t)\left(1 + \frac{a_2}{n-1}(1-t) - \frac{a_3}{3}t \right)\mathbf{P_2} + ... + \\
++ B_{i-1,n}(t)\left(1 + \frac{a_{i-1}}{n-i+2}(1-t) - \frac{a_i}{i}t \right) \mathbf{P_{i-1}} + \\
++ B_{i,n}(t) \left(1 + \frac{a_i}{n-i+1}(1-t) - \frac{a_{i+1}}{i+1}t \right) \mathbf{P_i} +...+ \\
++ B_{n,n}(t) \left(1 + a_n (1-t) + 0 \right) \mathbf{P_n}
+\end{gather*}
+
+El término de la expresión sobre la que actúa el parámetro $a_i$ es:
+
+\begin{gather*}
+a_i \left( -\frac{B_{i-1,n}(t)}{i} t \mathbf{P_{i-1}} + \frac{B_{i,n}(t)}{n-i+1} (1-t) \mathbf{P_i} \right) = \\
+= a_i \left( -\frac{\binom{n}{i-1}(1-t)^{n-i+1} t^{i-1}}{i} t \mathbf{P_{i-1}} + \frac{\binom{n}{j}(1-t)^{n-i}t^i}{n-i+1} (1-t) \mathbf{P_i} \right) = \\
+a_i \left( \frac{n!}{(n-i+1)!i!} (1-t)^{n-i+1} t^i  \right) \left( \mathbf{P_i} - \mathbf{P_{i-1}} \right)
+\end{gather*}
+
+Supongamos que $a_j = 0, \forall j\in\{0,1,...,n\}, j \neq i $, y cambiamos el valor del parámetro $a_i$ de $a_i^1$ a $a_i^2$, denotamos $\Delta a_i = a_i^1 - a_i^2$. La curva $\hat{\alpha}(t)$ cambiará de $\hat{\alpha}^1(t)$ a $\hat{\alpha}^2(t)$, igualmente denotamos $\Delta \hat{\alpha}(t) = \hat{\alpha}^1(t) - \hat{\alpha}^2(t)$. Se tiene que:
+
+\begin{equation*}
+\Delta \hat{\alpha}(t) = \Delta a_i \frac{n!}{(n-i+1)!i!}(1-t)^{n-i+1}t^i \left( \mathbf{P_i} - \mathbf{P_{i-1}} \right)
+\end{equation*}
+
+Esto tiene la siguiente interpretación geométrica: Fijando $t_0 \in [0,1]$, el punto $\hat{\alpha}(t_0) \in \R^m$ se desplaza en la dirección $\overrightarrow{\mathbf{P_{i-1}P_i}}$ con una magnitud de
+
+\begin{equation*}
+\lVert \Delta\hat{\alpha}(t_o) \rVert =  \Delta a_i \frac{n!}{(n-i+1)!i!}(1-t_0)^{n-i+1}t_0^j \lVert \overrightarrow{\mathbf{P_{i-1}P_i}} \rVert
+\end{equation*}
+
+
+
+
+
+
 \end{document}
