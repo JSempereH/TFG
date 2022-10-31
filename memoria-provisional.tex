@@ -112,10 +112,136 @@ Veámoslo gráficamente:
 \textbf{NOTA: PONER AQUÍ LAS GRÁFICAS. CÓDIGO EN EL JUPYTER NOTEBOOK}
 
 
+Veamos ahora cómo conectar dos curvas de Bézier con parámetros de forma.\\
 
+\textbf{Definición: (Continuidad paramétrica, $\mathbf{C^r}$)} \\
+
+Sean dos curvas de Bézier $\hat{\alpha}(t,a_1,...,a_n)$ y $\hat{\beta}(t,b_1,...,b_m)$, $t\in[0,1]$ con n y m parámetros de forma respectivamente, ambas curvas diferenciables hasta grado $r+1$, $(n,m > r)$. Diremos que $\hat{\alpha}$ y $\hat{\beta}$ son $C^r$-continuas si se cumple:
+
+\begin{equation}
+\hat{\alpha}^{k)}(1,a_1,...,a_n) = \hat{\beta}^{k)}(0,b_1,...,b_m), \forall k \in \{0,1,...,r\}
+\end{equation}
+
+donde $^{k)}$ denota la derivada k-ésima respecto la variable t.\\
+
+Estudiemos más en detalle este tipo de continuidad para $r<3$.
+
+\begin{equation*}
+\hat{\alpha}(t,a_1,...,a_n) = \sum_{i=0}^{n}\hat{B}_{i,n}(t)\mathbf{P_i} = \sum_{i=0}^n B_{i,n}(t)\left[ 1 + \frac{a_i}{n-i+1}(1-t) - \frac{a_{i+1}}{i+1}t \right] \mathbf{P_i}
+\end{equation*}
+
+
+\begin{equation*}
+\hat{\beta}(t,b_1,...,b_m) = \sum_{j=0}^{m}\hat{B}_{j,m}(t)\mathbf{Q_j} = \sum_{j=0}^m B_{j,m}(t)\left[ 1 + \frac{b_j}{m-j+1}(1-t) - \frac{b_{j+1}}{j+1}t \right] \mathbf{Q_j}
+\end{equation*}
+
+
+%-----------CONDICIONES C^r---------------
+
+\textbf{Condiciones} $\mathbf{C^0}$:
+
+Observamos que: $B_{i,n}(1) = \delta_{i,n}$ y $B_{i,n}(0) = \delta_{i,0}$, siendo $\delta_{i,j}$ la \textit{Delta de Kronecker} y recordemos que $a_0=a_{n+1}=b_0=b_{m+1}=0$ Se tiene que:
+
+\begin{equation*}
+\hat{\alpha}(1,a_1,...,a_n) = \sum_{i=0}^n \delta_{i,n} \left[ 1 + \frac{a_i}{n-i+1}(1-1) - \frac{a_{i+1}}{i+1}  \right] \mathbf{P_i} = \left[ 1 + 0 - \frac{a_{n+1}}{i+1} \right] \mathbf{P_n} = \mathbf{P_n}
+\end{equation*}
+
+\begin{equation*}
+\hat{\beta}(0,b_1,...,b_m) = \sum_{j=0}^m \delta_{j,0} \left[ 1 + \frac{b_j}{m-j+1}(1-0) - \frac{b_{j+1}}{j+1}0 \right] \mathbf{Q_j} = \left[ 1 + \frac{b_0}{m-0+1} - 0 \right] \mathbf{Q_0} = \mathbf{Q_0}
+\end{equation*}
+
+Por tanto, la condición para la continuidad $C^0	$ es:
+\begin{equation}
+\mathbf{P_n} = \mathbf{Q_0} 
+\end{equation}
+
+
+
+\textbf{Condiciones} $\mathbf{C^1}$:
+
+Deben cumplirse las Condiciones $C^0$: $\mathbf{P_n} = \mathbf{Q_0} $\\
+
+Además debe cumplirse: $\hat{\alpha}^{1)}(1,a_1,...,a_n) = \hat{\beta}^{1)}(0,b_1,...,b_m)$
+
+\begin{equation*}
+\hat{\alpha}^{1)}(t,a_1,...,a_n) = \sum_{i=0}^n \left[\frac{d}{dt}\left( B_{i,n}(t) \right) \left[ 1 + \frac{a_i}{n-i+1}(1-t) - \frac{a_{i+1}}{i+1}t \right] -B_{i,n}(t) \left[\frac{a_i}{n-i+1} + \frac{a_{i+1}}{i+1} \right] \right] \mathbf{P_i}
+\end{equation*}
+
+\begin{equation*}
+\hat{\beta}^{1)}(t,b_1,...,b_m) = \sum_{j=0}^m \left[\frac{d}{dt}\left( B_{j,m}(t) \right) \left[ 1 + \frac{b_j}{m-j+1}(1-t) - \frac{b_{j+1}}{j+1}t \right] -B_{j,m}(t) \left[\frac{b_j}{m-j+1} + \frac{b_{j+1}}{j+1} \right] \right] \mathbf{Q_j}
+\end{equation*}
+
+Teniendo en cuenta que $\frac{d}{dt}B_{i,n}(t) = n\left( B_{i-1,n-1}(t) - B_{i,n-1}(t) \right)$, se tiene que:
+\begin{equation*}
+\frac{d}{dt}B_{i,n}(1) = n(\delta_{i-1,n-1} - \delta_{i,n-1}) = n(\delta_{i,n} - \delta_{i,n-1})
+\end{equation*}
+\begin{equation*}
+\frac{d}{dt}B_{i,n}(0) = n(\delta_{i-1,0} - \delta_{i,0})
+\end{equation*}
+
+Por tanto:
+\begin{gather*}
+\hat{\alpha}^{1)}(1,a_1,...,a_n) = \\
+= \sum_{i=0}^n \left[ n \left( \delta_{i,n} - \delta_{i,n-1} \right) \left[ 1 + \frac{a_i}{n-i+1}(1-1) - \frac{a_{i+1}}{i+1}1 \right] -\delta_{i,n} \left[\frac{a_i}{n-i+1} + \frac{a_{i+1}}{i+1} \right] \right] \mathbf{P_i} = \\
+= -n \left[ 1 - \frac{a_n}{n} \right]\mathbf{P_{n-1}} + \left[ n - a_n \right]\mathbf{P_n} = \\
+= \left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}
+\end{gather*}
+
+\begin{gather*}
+\hat{\beta}^{1)}(0,b_1,...,b_m) = \\
+=  \sum_{j=0}^m \left[n\left( \delta_{j-1,0} - \delta_{j,0} \right) \left[ 1 + \frac{b_j}{m-j+1}(1-0) - \frac{b_{j+1}}{j+1}0 \right] -\delta_{j,0} \left[\frac{b_j}{m-j+1} + \frac{b_{j+1}}{j+1} \right] \right] \mathbf{Q_j} = \\
+= \left[-m\left(1 + \frac{b_0}{m-j+1} \right) - (0+b_1) \right]\mathbf{Q_0} + \left[m \left( 1 + \frac{b_1}{n} \right) \right] \mathbf{Q_1} = \\
+= -\left[ m+b_1 \right]\mathbf{Q_0} + \left[ m + b_1 \right]\mathbf{Q_1}
+\end{gather*}
+
+Entonces, debe cumplirse:
+\begin{equation}
+\mathbf{Q_1} = \frac{\left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}}{m+b_1} + \mathbf{Q_0}
+\end{equation}
+
+
+\textbf{Condiciones} $\mathbf{C^2}$:
+
+Deben cumplirse las condiciones de $C^1$: 
+\begin{gather*}
+\mathbf{Q_0} = \mathbf{P_n} \\
+\mathbf{Q_1} = \frac{\left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}}{m+b_1} + \mathbf{Q_0}
+\end{gather*}
+
+Y además debe cumplirse: $\hat{\alpha}^{2)}(1,a_1,...,a_n) = \hat{\beta}^{2)}(0,b_1,...,b_m)$
+
+\begin{gather*}
+\hat{\alpha}^{2)}(t,a_1,...,a_n) = \\
+= \sum_{i=0}^n \left[\frac{d^2}{dt^2}\left( B_{i,n}(t) \right) \left[ 1 + \frac{a_i}{n-i+1}(1-t) - \frac{a_{i+1}}{i+1}t \right] -2\frac{d}{dt}B_{i,n}(t) \left[\frac{a_i}{n-i+1} + \frac{a_{i+1}}{i+1} \right] \right] \mathbf{P_i}
+\end{gather*}
+
+\begin{gather*}
+\hat{\beta}^{2)}(t,b_1,...,b_m) = \\
+= \sum_{j=0}^m \left[\frac{d^2}{dt^2}\left( B_{j,m}(t) \right) \left[ 1 + \frac{b_j}{m-j+1}(1-t) - \frac{b_{j+1}}{j+1}t \right] -2\frac{d}{dt}B_{j,m}(t) \left[\frac{b_j}{m-j+1} + \frac{b_{j+1}}{j+1} \right] \right] \mathbf{Q_j}
+\end{gather*}
+
+Observamos que:
+
+\begin{equation*}
+\frac{d^2}{dt^2}\left( B_{i,n}(t) \right) = n \left[ \frac{d}{dt}B_{i-1,n-1}(t) - \frac{d}{dt}B_{i,n-1}(t) \right] = n(n-1)\left[ B_{i-2,n-2}(t) -2B_{i-1,n-2}(t) + B_{i,n-2}(t) \right]
+\end{equation*}
+
+Por tanto:
+
+\begin{gather*}
+\frac{d^2}{dt^2}B_{i,n}(1) = n(n-1)\left[ \delta_{i,n} -2\delta_{i,n-1} + \delta_{i,n-2} \right] \\
+\frac{d^2}{dt^2}B_{i,n}(0) = n(n-1)\left[ \delta_{i-2,0} -2\delta_{i-1,0} + \delta_{i,0} \right]
+\end{gather*}
+
+\begin{gather*}
+\hat{\alpha}^{2)}(1,a_1,...,a_n) = \\
+= \sum_{i = 0}^n \left[ n(n-1)\left[ \delta_{i,n} -2\delta_{i,n-1} + \delta_{i,n-2} \right]\left[  1-\frac{a_{i+1}}{i+1}\right] -2n\left[\delta_{i,n} -\delta_{i,n-1} \right] \left[\frac{a_i}{n-i+1} + \frac{a_{i+1}}{i+1} \right] \right] \mathbf{P_i} = \\
+= \left[n(n-1-a_{n-1}) \right]\mathbf{P_{n-2}} + \left[-2(n-1)(n-a_n) + na_{n-1} + 2a_n \right]\mathbf{P_{n-1}} + \left[ n(n-1) -2na_n \right]\mathbf{P_n}
+\end{gather*}
 
 
 \subsection{Curvas fraccionarias generalizadas}
+
 
 
 
