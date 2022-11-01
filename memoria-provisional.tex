@@ -116,7 +116,7 @@ Veamos ahora cómo conectar dos curvas de Bézier con parámetros de forma.\\
 
 \textbf{Definición: (Continuidad paramétrica, $\mathbf{C^r}$)} \\
 
-Sean dos curvas de Bézier $\hat{\alpha}(t,a_1,...,a_n)$ y $\hat{\beta}(t,b_1,...,b_m)$, $t\in[0,1]$ con n y m parámetros de forma respectivamente, ambas curvas diferenciables hasta grado $r+1$, $(n,m > r)$. Diremos que $\hat{\alpha}$ y $\hat{\beta}$ son $C^r$-continuas si se cumple:
+Sean dos curvas de Bézier $\hat{\alpha}(t,a_1,...,a_n)$ y $\hat{\beta}(t,b_1,...,b_m)$, $t\in[0,1]$ con n y m parámetros de forma respectivamente, ambas curvas de grado $r+1$, $(n,m > r)$. Diremos que $\hat{\alpha}$ y $\hat{\beta}$ son $C^r$-continuas si se cumple:
 
 \begin{equation}
 \hat{\alpha}^{k)}(1,a_1,...,a_n) = \hat{\beta}^{k)}(0,b_1,...,b_m), \forall k \in \{0,1,...,r\}
@@ -253,10 +253,50 @@ Entonces, debe cumplirse:
 \end{gather*}
 
 
+\textbf{Definición: (Continuidad geométrica, $\mathbf{G^r}$)} \\
+
+Sean dos curvas de Bézier $\hat{\alpha}(t,a_1,...,a_n)$ y $\hat{\beta}(t,b_1,...,b_m)$, $t\in[0,1]$ con n y m parámetros de forma respectivamente, ambas curvas de grado $\geq r+1$, $(n,m > r)$. Diremos que $\hat{\alpha}$ y $\hat{\beta}$ son $G^r$-continuas si se cumple:
+
+\begin{gather*}
+\hat{\alpha}(1,a_1,...,a_n) = \hat{\beta}(0,b_1,...,b_m) \\
+\hat{\alpha}^{1)}(1,a_1,...,a_n) = k_1\hat{\beta}^{1)}(0,b_1,...,b_m) \\
+\hat{\alpha}^{2)}(1,a_1,...,a_n) = k_1^2\hat{\beta}^{2)}(0,b_1,...,b_m) + k_2\hat{\beta}^{1)}(0,b_1,...,b_m) \\
+...\\
+\hat{\alpha}^{r)}(1,a_1,...,a_n) = k_1^r\hat{\beta}^{r)}(0,b_1,...,b_m) + k_2^{r-1}\hat{\beta}^{r-1)}(0,b_1,...,b_m)+...+k_r\hat{\beta}^{1)}(0,b_1,...,b_m) \\
+k_1 > 0, k_i \in \mathbb{R}, i=2,...,r
+\end{gather*}
+
+
+%-----------CONDICIONES G^r---------------
+Estudiemos más en detalle este tipo de continuidad para $r<3$. Usando el desarrollo de las condiciones para la continuidad paramétrica $C^r$, se sigue que:\\
+
+
+\textbf{Condiciones} $\mathbf{G^0}$: 
+\begin{equation*}
+\mathbf{Q_0} = \mathbf{P_n}
+\end{equation*}
+
+\textbf{Condiciones} $\mathbf{G^1}$:
+\begin{gather*}
+\mathbf{Q_0} = \mathbf{P_n} \\
+\mathbf{Q_1} = \frac{\left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}}{k_1(m+b_1)} + \mathbf{Q_0}
+\end{gather*}
+
+\textbf{Condiciones} $\mathbf{G^2}$:
+\begin{gather*}
+\mathbf{Q_0} = \mathbf{P_n} \\
+\mathbf{Q_1} = \frac{\left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}}{k_1(m+b_1)} + \mathbf{Q_0} \\
+\mathbf{Q_2} = \frac{1}{k_1^2m(m-1+b2)} [ n(n-1-a_{n-1})\mathbf{P_{n-2}} + \left[ (-2n+2)(n-a_n) + a_{n-1} + 2a_n \right]\mathbf{P_{n-1}} + \\
++ \left[n(n-1) -2na_n \right]\mathbf{P_n} - k_1^2\left[ m(m-1) + 2mb_1 \right]\mathbf{Q_0} -k_1^2\left[ -2(m-1)(m+b_1) -2b_1 -mb_2 \right]\mathbf{Q_1} - \\
+\\ -k_2(m+b_1)(\mathbf{Q_1} - \mathbf{Q_0}) ]
+\end{gather*}
+
+
 
 \subsection{Curvas fraccionarias generalizadas}
 
 
 
+\section{Referencias}
 
 \end{document}
