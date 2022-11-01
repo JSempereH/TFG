@@ -208,7 +208,7 @@ Deben cumplirse las condiciones de $C^1$:
 \mathbf{Q_1} = \frac{\left[ a_n - n \right]\mathbf{P_{n-1}} + \left[ n - a_n \right] \mathbf{P_n}}{m+b_1} + \mathbf{Q_0}
 \end{gather*}
 
-Y además debe cumplirse: $\hat{\alpha}^{2)}(1,a_1,...,a_n) = \hat{\beta}^{2)}(0,b_1,...,b_m)$
+Y además debe cumplirse: $\hat{\alpha}^{2)}(1,a_1,...,a_n) = \hat{\beta}^{2)}(0,b_1,...,b_m)$:
 
 \begin{gather*}
 \hat{\alpha}^{2)}(t,a_1,...,a_n) = \\
@@ -238,6 +238,20 @@ Por tanto:
 = \sum_{i = 0}^n \left[ n(n-1)\left[ \delta_{i,n} -2\delta_{i,n-1} + \delta_{i,n-2} \right]\left[  1-\frac{a_{i+1}}{i+1}\right] -2n\left[\delta_{i,n} -\delta_{i,n-1} \right] \left[\frac{a_i}{n-i+1} + \frac{a_{i+1}}{i+1} \right] \right] \mathbf{P_i} = \\
 = \left[n(n-1-a_{n-1}) \right]\mathbf{P_{n-2}} + \left[-2(n-1)(n-a_n) + na_{n-1} + 2a_n \right]\mathbf{P_{n-1}} + \left[ n(n-1) -2na_n \right]\mathbf{P_n}
 \end{gather*}
+
+\begin{gather*}
+\hat{\beta}^{2)}(0,b_1,...,b_m) = \\
+= \sum_{j = 0}^m \left[ m(m-1)\left[ \delta_{j-2,0} -2\delta_{j-1,0} + \delta_{j,0} \right]\left[  1+\frac{b_j}{m-j+1}\right] -2m\left[\delta_{j-1,0} -\delta_{j,0} \right] \left[\frac{b_j}{m-j+1} + \frac{b_{j+1}}{j+1} \right] \right] \mathbf{Q_j} = \\
+= \left[ m(m-1) +2mb_1 \right]\mathbf{Q_0} + \left[ -2(m-1)(m+b_1) -2b_1 -mb_2 \right]\mathbf{Q_1} + \left[ m(m-1+b_2) \right]\mathbf{Q_2}
+\end{gather*}
+
+Entonces, debe cumplirse:
+
+\begin{gather*}
+\mathbf{Q_2} = \frac{1}{m(m-1+b2)} [ n(n-1-a_{n-1})\mathbf{P_{n-2}} + \left[ (-2n+2)(n-a_n) + a_{n-1} + 2a_n \right]\mathbf{P_{n-1}} + \\
++ \left[n(n-1) -2na_n \right]\mathbf{P_n} - \left[ m(m-1) + 2mb_1 \right]\mathbf{Q_0} -\left[ -2(m-1)(m+b_1) -2b_1 -mb_2 \right]\mathbf{Q_1} ]
+\end{gather*}
+
 
 
 \subsection{Curvas fraccionarias generalizadas}
