@@ -5,7 +5,8 @@ Trabajo Fin de Grado Ingeniería Matemática
 ### 2.1-Parámetros de formas
 - [X] Estudiar el cambio geométrico de los parámetros de forma
 - [] Poner un ejemplo de cambio en los parámetros de forma
-- [] Estudiar la continuidad paramétrica y geométrica con los parámetros de forma
+- [X] Estudiar la continuidad paramétrica y geométrica con los parámetros de forma
+- [] Poner un ejemplo de continuidad parámetrica y geométrica
 ### 2.2-Parámetro fraccional
 - [] Definición formal y ejemplo de su interpretación geométrica (con datos de la longitud) con gráficos.
 - [] Ver qué pasa al cambiar la función del parámetro fraccional, en vez de usar la Integral de Riemann-Liouville, usar una función que acorte el valor de las t conforme aumente v.
